@@ -42,6 +42,10 @@
     },
     "rules": {}
   },
+  "prettier": {
+    "singleQuote": false,
+    "semi": false
+  },
   "browserslist": [
     "> 1%",
     "last 2 versions",
