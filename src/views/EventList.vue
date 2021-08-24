@@ -1,31 +1,42 @@
 <template>
-  <div class="events">
-    <h1>Events for good</h1>
-    <EventCard v-for="event in events" :key="event.id" :event="event" />
-  </div>
+    <div class="events">
+        <h1>Events for good</h1>
+        <EventCard v-for="event in events" :key="event.id" :event="event" />
+    </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import EventCard from "@/components/EventCard.vue"
-
+import EventCard from "@/components/EventCard.vue";
+import EventService from "@/services/EventService.js";
 export default {
-  name: "EventList",
-  components: {
-    EventCard,
-  },
-  data() {
-    return {
-      events: []
-    }
-  },
-}
+    name: "EventList",
+    components: {
+        EventCard,
+    },
+    data() {
+        return {
+            events: null,
+        };
+    },
+    created() {
+        console.log('created')
+        EventService.getEvents()
+            .then((response) => {
+                console.log('then')
+                this.events = response.data;
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },
+};
 </script>
 
 <style scoped>
 .events {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 </style>
